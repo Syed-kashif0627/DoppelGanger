@@ -2,6 +2,7 @@ import cv2
 import mediapipe as mp
 import numpy as np
 import math
+import streamlit as st
 
 mp_drawing = mp.solutions.drawing_utils
 mp_pose = mp.solutions.pose
@@ -35,7 +36,7 @@ def calculate_marker_dimensions(corners):
 
     return vertical_ref,horizontal_ref
 
-def main():
+def run_body_measurement_system():
     size_ranges = {
     'S': (0, 30),
     'M': (31, 49),
@@ -131,6 +132,17 @@ def main():
 
     cap.release()
     cv2.destroyAllWindows()
+    pass
+
+def main():
+    st.title("Body Measurement System")
+    st.write("This system uses the Pose and ArUco markers to measure the body dimensions.")
+    st.write("Please make sure that you have an ArUco marker with you to measure the body dimensions.")
+    st.write("You can print the ArUco marker from the following link: [ArUco Marker](https://chev.me/arucogen/)")
+    st.write("Please make sure that you have a clear background to get accurate measurements.")
+    st.write("Press 'q' to exit the system.")
+    if st.button("Start"):
+        run_body_measurement_system()
 
 if __name__ == "__main__":
     main()
